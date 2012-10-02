@@ -1,0 +1,14 @@
+ZeroSprites is a CSS sprites generator aimed at area minimization using VLSI floorplaning algorithms.
+Online version: http://cly.jsser.com/sprites/
+
+Usage:
+sprites.sh (directory | png files)
+Output consists of sprites.txt and sprites.png
+
+Notice:
+Use pngnq to generate png8 output if necessary.
+You can use png optimizer(optipng, pngout) to make output smaller.
+
+Reference:
+H. H. Chan and I. L. Markov, ``Practical Slicing and Non-slicing Block-Packing without Simulated Annealing", Technical Report CSE-TR-487-04, The University of Michigan, 2004.
+T.-C. Chen and Y.-W. Chang, ``Modern Floorplanning Based on B*-trees and Fast Simulated Annealing", IEEE Trans. Computer-Aided Design of Integrated Circuits and Systems (TCAD), Vol. 25, No. 4, pp. 637--650, April 2006.
