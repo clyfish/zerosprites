@@ -33,7 +33,7 @@ n=`wc -l < input.txt`
 
 (
     ulimit -t "$RECTPACK_TIMEOUT"
-    $BASE_DIR/rectpack -b0 -i `awk '{if(NR!=1){printf ","}printf "%s",$2"x"$3}' input.txt` > output_rectpack.txt
+    $BASE_DIR/rectpack -qb0 -i `awk '{if(NR!=1){printf ","}printf "%s",$2"x"$3}' input.txt` > output_rectpack.txt
 )
 
 if [[ `wc -l < output_rectpack.txt` -eq $((n+1)) ]]
