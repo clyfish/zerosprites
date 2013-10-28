@@ -1,5 +1,5 @@
-ZeroSprites is a CSS sprites generator aimed at area minimization using VLSI floorplaning algorithms.
-Online version: http://cly.jsser.com/sprites/
+ZeroSprites is a CSS sprites generator aimed at area minimization using algorithms used in the field of VLSI floorplanning.
+Online version: http://zerosprites.com/
 
 Usage:
 sprites.sh padding (directory | png files)
