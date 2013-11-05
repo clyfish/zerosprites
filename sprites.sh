@@ -44,8 +44,8 @@ then
 else
     awk '{print NR,$2,$3}' input.txt > input_btree.txt
     $BASE_DIR/btree input_btree.txt -simple -times 200 -maxIte 99999999 &>/dev/null
-    w=`awk 'NR==2{print $3-1}' input_btree.txt.info`
-    h=`awk 'NR==3{print $3-1}' input_btree.txt.info`
+    w=`awk -v padding="$padding" 'NR==2{print $3-padding}' input_btree.txt.info`
+    h=`awk -v padding="$padding" 'NR==3{print $3-padding}' input_btree.txt.info`
     paste <(awk '{print $1}' input.txt) <(awk 'NF==5{print $2,$4}' input_btree.txt.info) > ../sprites.txt
 fi
 
