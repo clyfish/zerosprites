@@ -49,7 +49,7 @@ else
     paste <(awk '{print $2,$3}' input_btree.txt) <(awk 'NF==5{print $2,$4}' input_btree.txt.info) > output.txt
 fi
 
-paste <(awk '{print $2, $3, $1}' input.txt | sort) <(sort output.txt -n -k1 -k2 -k4 -k3) | awk '{print $3, $6, $7}' | sort > ../sprites.txt
+paste <(awk '{print $2, $3, $1}' input.txt | python $BASE_DIR/alphanum.py) <(awk '{print $1,$2,$4,$3}' output.txt | python $BASE_DIR/alphanum.py) | awk '{print $3, $7, $6}' | python $BASE_DIR/alphanum.py > ../sprites.txt
 
 cd ..
 #rm -r "$tmpdir"
