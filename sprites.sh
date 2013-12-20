@@ -27,7 +27,7 @@ cd "$tmpdir"
 
 for png in $files
 do
-    echo "$png	`identify -format "%w %h" ../"$png" | awk -v padding="$padding" '{print $1+padding, $2+padding}'`"
+    echo "$png	`identify -format "%w %h\n" ../"$png" | awk -v padding="$padding" 'NR==1{print $1+padding, $2+padding}'`"
 done > input.txt
 n=`wc -l < input.txt`
 
