@@ -52,6 +52,6 @@ fi
 paste <(awk '{print $2, $3, $1}' input.txt | python $BASE_DIR/alphanum.py) <(awk '{print $1,$2,$4,$3}' output.txt | python $BASE_DIR/alphanum.py) | awk '{print $3, $7, $6}' | python $BASE_DIR/alphanum.py > ../sprites.txt
 
 cd ..
-#rm -r "$tmpdir"
+rm -r "$tmpdir"
 
 convert -strip -size "${w}x${h}" xc:"rgba(0,0,0,0)" `awk '{print $1" -geometry +"$2"+"$3" -composite"}' sprites.txt` sprites.png
