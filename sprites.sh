@@ -54,4 +54,4 @@ paste <(awk '{print $2, $3, $1}' input.txt | python $BASE_DIR/alphanum.py) <(awk
 cd ..
 rm -r "$tmpdir"
 
-convert -strip -size "${w}x${h}" xc:"rgba(0,0,0,0)" `awk '{print $1" -geometry +"$2"+"$3" -composite"}' sprites.txt` sprites.png
+convert -strip -size "${w}x${h}" xc:"rgba(0,0,0,0)" `awk '{print $1" -geometry +"$2"+"$3" -composite"}' sprites.txt` PNG32:sprites.png
