@@ -2,7 +2,7 @@
 
 RECTPACK_TIMEOUT=20
 
-BASE_DIR=`dirname $0`
+BASE_DIR=`cd $(dirname $0) && pwd`
 
 [[ $# -le 1 || ! "$1" =~ ^[0-9]+$ ]] && {
     echo "Usage: $0 padding (directory | png files)"
@@ -23,12 +23,13 @@ files=`find "$@" -name "*.png" \! -name sprites.png`
 
 tmpdir=".sprites.sh.$$"
 mkdir "$tmpdir"
-cd "$tmpdir"
 
 for png in $files
 do
-    echo "$png	`identify -format "%w %h\n" ../"$png" | awk -v padding="$padding" 'NR==1{print $1+padding, $2+padding}'`"
-done > input.txt
+    echo "$png	`identify -format "%w %h\n" "$png" | awk -v padding="$padding" 'NR==1{print $1+padding, $2+padding}'`"
+done > "$tmpdir/input.txt"
+
+cd "$tmpdir"
 n=`wc -l < input.txt`
 
 (
