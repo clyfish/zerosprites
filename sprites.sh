@@ -3,6 +3,8 @@
 RECTPACK_TIMEOUT=20
 
 BASE_DIR=`cd $(dirname $0) && pwd`
+[[ `uname -m` == "x86_64" ]] && RECTPACK="$BASE_DIR/rectpack" || RECTPACK="$BASE_DIR/rectpack.32"
+BTREE="$BASE_DIR/btree"
 
 [[ $# -le 1 || ! "$1" =~ ^[0-9]+$ ]] && {
     echo "Usage: $0 padding (directory | png files)"
@@ -34,7 +36,7 @@ n=`wc -l < input.txt`
 
 (
     ulimit -t "$RECTPACK_TIMEOUT"
-    $BASE_DIR/rectpack -qb0 -i `awk '{if(NR!=1){printf ","}printf "%s",$2"x"$3}' input.txt` > output_rectpack.txt
+    $RECTPACK -qb0 -i `awk '{if(NR!=1){printf ","}printf "%s",$2"x"$3}' input.txt` > output_rectpack.txt
 )
 
 if [[ `wc -l < output_rectpack.txt` -eq $((n+1)) ]]
@@ -44,7 +46,7 @@ then
     awk -F'[x(), ]+' 'NR>1{print $1, $2, $3, $4}' output_rectpack.txt > output.txt
 else
     awk '{print NR,$2,$3}' input.txt > input_btree.txt
-    $BASE_DIR/btree input_btree.txt -simple -times 200 -maxIte 99999999 &>/dev/null
+    $BTREE input_btree.txt -simple -times 200 -maxIte 99999999 &>/dev/null
     w=`awk -v padding="$padding" 'NR==2{print $3-padding}' input_btree.txt.info`
     h=`awk -v padding="$padding" 'NR==3{print $3-padding}' input_btree.txt.info`
     paste <(awk '{print $2,$3}' input_btree.txt) <(awk 'NF==5{print $2,$4}' input_btree.txt.info) > output.txt
